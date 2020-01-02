@@ -113,7 +113,7 @@ void read_buffer(void* lpParam, lewei_video_frame *pFrame)
     cvLinesizes[0] = image.step1();
  
     // Convert the colour format and write directly to the opencv matrix
-    SwsContext* conversion = sws_getContext(width, height, (AVPixelFormat) pVideoFrame->format, width, height, PIX_FMT_BGR24, SWS_FAST_BILINEAR, NULL, NULL, NULL);
+    SwsContext* conversion = sws_getContext(width, height, (AVPixelFormat) pVideoFrame->format, width, height, AV_PIX_FMT_BGR24, SWS_FAST_BILINEAR, NULL, NULL, NULL);
     sws_scale(conversion, pVideoFrame->data, pVideoFrame->linesize, 0, height, &image.data, cvLinesizes);
     sws_freeContext(conversion);
 

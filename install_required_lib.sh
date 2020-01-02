@@ -3,9 +3,11 @@
 echo 'Installing sdl and ffmpeg libraries'
 echo 'You might need to enter your password'
 
-sudo apt-get update
+#copying camera lib to usr/lib
+sudo cp ./pluto_camera_sense/lib/libLeweiLib.so /usr/lib
 
 # install dependencies
+sudo apt-get update
 sudo apt-get install libsdl2-dev -y
 sudo apt-get install libavcodec-dev -y
 sudo apt-get install libswscale-dev -y
