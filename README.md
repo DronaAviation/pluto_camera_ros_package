@@ -15,4 +15,4 @@ Run [install_required_lib.sh](/install_required_lib.sh) script to install necess
 rosrun pluto_camera_sense plutocamera
 
 # To start streaming camera feed
-rosrun pluto_image_sub imagenode 
+rosrun pluto_image_sub imagepronode 
