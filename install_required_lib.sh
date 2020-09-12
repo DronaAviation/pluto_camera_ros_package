@@ -14,6 +14,8 @@ sudo apt-get install libswscale-dev -y
 sudo apt-get install libavformat-dev -y
 sudo apt-get install libavutil-dev -y
 sudo apt-get install libavdevice-dev -y
+sudo apt-get install libyaml-cpp-dev -y
+sudo apt-get install ros-kinetic-cv-bridge -y
 
 echo 'Installation Done!!'
 
