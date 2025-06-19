@@ -24,7 +24,7 @@ typedef struct _LEWEI_VIDEO_FRAME_T
     int64_t timestamp;
     uint32_t iFrame;
     uint32_t size;
-    unsigned char *buf;			
+    unsigned char *buf;
 } lewei_video_frame;
 
 typedef void P_LEWEI_CALLBACK(void *param, lewei_video_frame *pframe);

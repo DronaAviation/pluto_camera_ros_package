@@ -1,5 +1,3 @@
-
-
 #include "ros/ros.h"
 #include <iostream>
 #include "std_msgs/String.h"
@@ -38,7 +36,7 @@ void imageCallback(const sensor_msgs::ImageConstPtr& msg)
 
   try
   {
-    imshow("view", cv_ptr->image);
+    imshow("PlutoCam Feed", cv_ptr->image);
 
     waitKey(1);
   }

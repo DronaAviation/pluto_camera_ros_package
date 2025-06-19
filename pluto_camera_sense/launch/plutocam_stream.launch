@@ -1,0 +1,17 @@
+<launch>
+    <!-- PlutoCamera streaming node using PlutoCam library -->
+    <node name="plutocam_publisher" pkg="pluto_camera_sense" type="plutocam_publisher.py" output="screen">
+        <!-- Camera connection parameters -->
+        <param name="camera_ip" value="192.168.1.1" />  <!-- Default from C++ was 192.168.1.1:8080 -->
+        <param name="cmd_port" value="8065" />
+        <param name="stream_port" value="7065" />
+        
+        <!-- Stream parameters -->
+        <param name="high_def" value="true" />
+        <param name="publish_rate" value="30.0" />
+        
+        <!-- Keep same topic names as C++ version for compatibility -->
+        <!-- Topics: plutocamera/image_raw, plutocamera/image_raw/compressed -->
+    </node>
+</launch>
+

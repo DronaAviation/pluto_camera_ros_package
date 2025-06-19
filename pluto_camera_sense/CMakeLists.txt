@@ -1,25 +1,12 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(pluto_camera_sense)
 
-## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
-
-
-set(CMAKE_CXX_STANDARD 14)
-
-SET(CMAKE_CXX_FLAGS -pthread)
-
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/Modules/")
-
 ## Find catkin macros and libraries
-## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
-## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
+  rospy
   std_msgs
-  message_generation
+  sensor_msgs
   image_transport
-  camera_info_manager
   cv_bridge
 )
 
@@ -123,60 +110,30 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-  INCLUDE_DIRS include
-  LIBRARIES pluto_camera_sense
-  image_transport
-  cv_bridge
-  CATKIN_DEPENDS roscpp
-  std_msgs
-  message_runtime
-#  DEPENDS system_lib
+  CATKIN_DEPENDS rospy std_msgs sensor_msgs image_transport cv_bridge
 )
-
-set(OPENPOSE_DIR "$ENV{OPENPOSE_HOME}")
 
 ###########
 ## Build ##
 ###########
 
-## Specify additional locations of header files
-## Your package locations should be listed before other locations
-include_directories(
-  include
-  ${catkin_INCLUDE_DIRS}}
+# No build steps needed for Python
+
+#############
+## Install ##
+#############
+
+# Install Python scripts
+catkin_install_python(PROGRAMS
+  scripts/plutocam_publisher.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
+# Install launch files
+install(DIRECTORY launch/
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
+)
 
-## Declare a C++ library
-
-add_library(pluto_camera_sense src/)
-
-target_link_libraries(pluto_camera_sense)
-
-## Add cmake target dependencies of the library
-## as an example, code may need to be generated before libraries
-## either from message generation or dynamic reconfigure
-# add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
-## Declare a C++ executable
-## With catkin_make all packages are built within a single CMake context
-## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/pluto_camera_sense_node.cpp)
-
-## Rename C++ executable without prefix
-## The above recommended prefix causes long target names, the following renames the
-## target back to the shorter version for ease of user use
-## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
-# set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
-
-## Add cmake target dependencies of the executable
-## same as for the library above
-# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
-## Specify libraries to link a library or executable target against
-# target_link_libraries(${PROJECT_NAME}_node
-#   ${catkin_LIBRARIES}
-# )
 
 #############
 ## Install ##
@@ -225,19 +182,3 @@ target_link_libraries(pluto_camera_sense)
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-
-
-#find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs genmsg)
-
-#catkin_package()
-
-
-add_executable(plutocamera src/plutocamera.cpp)
-target_link_libraries(plutocamera ${catkin_LIBRARIES} pluto_camera_sense)
-#add_dependencies(PlutoCameraService pluto_camera_sense_generate_messages_cpp)
-
-include_directories(include ${catkin_INCLUDE_DIRS})
-
-target_link_libraries(pluto_camera_sense "${PROJECT_SOURCE_DIR}/lib/libLeweiLib.so" avcodec avformat avutil avdevice swscale)
-
-SET_TARGET_PROPERTIES(pluto_camera_sense PROPERTIES LINKER_LANGUAGE CXX)

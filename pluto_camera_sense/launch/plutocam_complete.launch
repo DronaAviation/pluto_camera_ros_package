@@ -1,0 +1,23 @@
+<launch>
+    <!-- Complete PlutoCamera setup: Publisher + Subscriber -->
+    
+    <!-- PlutoCamera Publisher using PlutoCam Python library -->
+    <node name="plutocam_publisher" pkg="pluto_camera_sense" type="plutocam_publisher.py" output="screen">
+        <!-- Camera connection parameters -->
+        <param name="camera_ip" value="192.168.0.1" />  
+        <param name="cmd_port" value="8065" />
+        <param name="stream_port" value="7065" />
+        
+        <!-- Stream parameters -->
+        <param name="high_def" value="true" />
+        <param name="publish_rate" value="30.0" />
+    </node>
+    
+    <!-- Image Subscriber/Viewer from pluto_image_sub package -->
+    <node name="imagepronode" pkg="pluto_image_sub" type="imagepronode" output="screen">
+        <!-- This node subscribes to plutocamera/image_raw topic -->
+        <!-- and displays the video in OpenCV window -->
+    </node>
+    
+</launch>
+
