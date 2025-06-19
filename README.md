@@ -9,10 +9,11 @@ Use following instructions on how to use this package:
 Run [install_required_lib.sh](/install_required_lib.sh) script to install necessary libraries. 
 
 ###### Run Package
+Navigate to pluto_camera_ros_package/pluto_camera_sense/scripts and run the python script to get camera frame and publish to ros topic
 
 ```
 # To get the frame from camera
-rosrun pluto_camera_sense plutocamera
+python3 plutocam_publisher.py
 
 # To start streaming camera feed
 rosrun pluto_image_sub imagepronode 
